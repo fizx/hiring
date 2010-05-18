@@ -25,6 +25,12 @@
         width: 100%;
         height: 80%;
       }
+      #help {
+        border:1px silver solid;
+        background-color:#eee;
+        padding: 1em;
+        margin: 1em 0;
+      }
     </style>
     <script>
       // Box-Mulder from http://vorlon.case.edu/~vxl11/software/gauss.html
@@ -66,6 +72,7 @@
         }
         // console.log(data);
         $.plot($("#plot"), data, {xaxis: { max: employees }});
+        $("#eph").text(interviews / (iterations * employees) +"");
       }
     </script>
   </head>
@@ -76,7 +83,7 @@
         <input type="text" id="employees" value="100">
       </div>
       <div>
-        Mean quality of applicant pool 
+        Mean quality of applicant pool (z-score)
         <input type="text" id="quality" value="-1">
       </div>
       <div>
@@ -84,7 +91,7 @@
         <input type="text" id="first" value="1">
       </div>
       <div>
-        Error margin(stddevs)
+        Error margin of our evaluation
         <input type="text" id="error" value="1">
       </div>
       <div>
@@ -95,8 +102,17 @@
         <input id="submit" type="submit" value="Graph!" />
       </div>
     </form>
+    <div id="help">
+      <a href="javascript:$('#help').toggle()" style="float:right">hide</a>
+      <p>This is a more detailed simulation of <a href="http://googleresearch.blogspot.com/2006/03/hiring-lake-wobegon-strategy.html">Google's hiring policy.</a>  We add the following features:
+      <ol>
+        <li>We assume an error margin in our ability to evaluate employees.</li>
+        <li>We assume an applicant pool that isn't necessarily centered on z=0.</li>
+        <li>We evaluate <a href="http://en.wikipedia.org/wiki/Standard_score">z-scores</a>, not percentile.</li>
+        <li>We calculate the average number of interviews for a successful hire.</li>
+    </div>
     <div>
-      Interviews per hire
+      Interviews per hire: <span id="eph">N/A</span>
     </div>
     <div id="plot">
     </div>
